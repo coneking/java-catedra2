@@ -30,6 +30,12 @@ public class Mantenedor extends javax.swing.JFrame {
         
         Regiones rg = new Regiones();
         rg.cargarR(cmbRegion);
+        
+        Ciudades ci = new Ciudades();
+        ci.cargarC(cmbCiudad);
+        
+        Sexo se = new Sexo();
+        se.cargarS(cmbSexo);
 //        Sexo();
   //      region();
     }
@@ -221,8 +227,6 @@ public class Mantenedor extends javax.swing.JFrame {
         cmbComuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("Ciudad");
-
-        cmbCiudad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel7.setText("Region");
 
@@ -883,10 +887,10 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<String> cmbCiudad;
+    private javax.swing.JComboBox<Ciudades> cmbCiudad;
     private javax.swing.JComboBox<String> cmbComuna;
     private javax.swing.JComboBox<Regiones> cmbRegion;
-    private javax.swing.JComboBox<String> cmbSexo;
+    private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
