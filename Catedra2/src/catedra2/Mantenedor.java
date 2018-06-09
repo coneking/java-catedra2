@@ -11,24 +11,27 @@ import java.sql.PreparedStatement;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author azapata
- * 
  */
 public class Mantenedor extends javax.swing.JFrame {
 
     /**
      * Creates new form Mantenedor
      */
-    
     DefaultTableModel modelo;
-    int fila= -1;
+    int fila = -1;
+
     public Mantenedor() {
         initComponents();
         inhabilitar();
-       Sexo();
-       region();
+        
+        Regiones rg = new Regiones();
+        rg.cargarR(cmbRegion);
+//        Sexo();
+  //      region();
     }
 
     /**
@@ -408,7 +411,7 @@ public class Mantenedor extends javax.swing.JFrame {
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
-        
+
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -416,7 +419,7 @@ public class Mantenedor extends javax.swing.JFrame {
         // TODO add your handling code here:
         String valor = txtRut.getText();
         CargarTablaEmpleados(valor);
-        
+
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
@@ -436,67 +439,63 @@ public class Mantenedor extends javax.swing.JFrame {
         sSQL = "DELETE FROM uhvida where rut = ?";
         mensaje = "Datos eliminados correctamente.";
         habilitar();
-        try
-        {
+        try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             pst.setString(1, rut1);
 
             int n = pst.executeUpdate();
 
-            if(n > 0)
-            {
+            if (n > 0) {
                 JOptionPane.showMessageDialog(null, mensaje);
                 CargarTablaEmpleados("");
             }
-        }
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         // TODO add your handling code here:
-      if (!ValidaRut.isValidRut(txtRut.getText(), txtDv.getText())) {
-            JOptionPane.showMessageDialog(null,"Rut indicado no es valido: " + txtRut.getText() + "-" + txtDv.getText()+"." ,"Buscar Rut",JOptionPane.ERROR_MESSAGE);
+        if (!ValidaRut.isValidRut(txtRut.getText(), txtDv.getText())) {
+            JOptionPane.showMessageDialog(null, "Rut indicado no es valido: " + txtRut.getText() + "-" + txtDv.getText() + ".", "Buscar Rut", JOptionPane.ERROR_MESSAGE);
             habilitar();
             return;
         }
-      if (txtNombre.getText().length() <= 0) {
+        if (txtNombre.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, "Debe ingresar el nombre antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtNombre.requestFocus(true);
             return;
         }
-      if (txtPaterno.getText().length() <= 0) {
+        if (txtPaterno.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, "Debe ingresar el apellido paterno antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtPaterno.requestFocus(true);
             return;
         }
-      if (txtMaterno.getText().length() <= 0) {
+        if (txtMaterno.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, "Debe ingresar el apellido materno antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtMaterno.requestFocus(true);
             return;
         }
-       if (txtDireccion.getText().length() <= 0) {
+        if (txtDireccion.getText().length() <= 0) {
             JOptionPane.showMessageDialog(null, "Debe ingresar la direccion antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtDireccion.requestFocus(true);
             return;
         }
         //int IndReg= cmbCiudad.getSelectedIndex();
         //if (IndReg<=0){
-            //    JOptionPane.showMessageDialog(null, "Debe seleccionar la ciudad antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            //    cmbCiudad.requestFocus(true);
-            //    return;
-            //}
+        //    JOptionPane.showMessageDialog(null, "Debe seleccionar la ciudad antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        //    cmbCiudad.requestFocus(true);
+        //    return;
+        //}
         //int IndCom = cmbComuna.getSelectedIndex();
         //if (IndCom<=0){
-            //    JOptionPane.showMessageDialog(null, "Debe seleccionar la comuna antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            //    cmbComuna.requestFocus(true);
-            //    return;
-            //}
-             if (txtTelefono.getText().length() > 0) {
+        //    JOptionPane.showMessageDialog(null, "Debe seleccionar la comuna antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+        //    cmbComuna.requestFocus(true);
+        //    return;
+        //}
+        if (txtTelefono.getText().length() > 0) {
             try {
-               int Valor2=Integer.parseInt(txtTelefono.getText());
+                int Valor2 = Integer.parseInt(txtTelefono.getText());
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "El numero de telefono es demasiado grande o no es un numero... Intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 txtTelefono.setText(null);
@@ -508,9 +507,10 @@ public class Mantenedor extends javax.swing.JFrame {
                 txtTelefono.requestFocus();
                 return;
             }
-        } if (txtCelular.getText().length() > 0) {
+        }
+        if (txtCelular.getText().length() > 0) {
             try {
-                int Valor3=Integer.parseInt(txtCelular.getText());
+                int Valor3 = Integer.parseInt(txtCelular.getText());
             } catch (NumberFormatException ex) {
                 JOptionPane.showMessageDialog(null, "El numero de celular es demasiado grande o no es un numero... Intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
                 txtCelular.setText(null);
@@ -525,26 +525,26 @@ public class Mantenedor extends javax.swing.JFrame {
         }
         //valido el largo de los campos
         if (txtNombre.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "El nombre es muy largo, solo se permiten 50 caracteres... escribio "+txtNombre.getText().length()+", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El nombre es muy largo, solo se permiten 50 caracteres... escribio " + txtNombre.getText().length() + ", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtNombre.requestFocus(true);
             return;
         }
         if (txtPaterno.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "El apellido paterno es muy largo, solo se permiten 50 caracteres... escribio "+txtNombre.getText().length()+", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El apellido paterno es muy largo, solo se permiten 50 caracteres... escribio " + txtNombre.getText().length() + ", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtPaterno.requestFocus(true);
             return;
         }
         if (txtMaterno.getText().length() > 50) {
-            JOptionPane.showMessageDialog(null, "El apellido materno es muy largo, solo se permiten 50 caracteres... escribio "+txtNombre.getText().length()+", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El apellido materno es muy largo, solo se permiten 50 caracteres... escribio " + txtNombre.getText().length() + ", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtMaterno.requestFocus(true);
             return;
         }
         if (txtDireccion.getText().length() > 120) {
-            JOptionPane.showMessageDialog(null, "El campo direccion es muy largo, solo se permiten 50 caracteres... escribio "+txtNombre.getText().length()+", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "El campo direccion es muy largo, solo se permiten 50 caracteres... escribio " + txtNombre.getText().length() + ", intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtDireccion.requestFocus(true);
             return;
         }
-             ConexionMySQL mysql = new ConexionMySQL();
+        ConexionMySQL mysql = new ConexionMySQL();
         Connection cn = mysql.Conectar();
         //String rut1, dv1, nom, pat, mat, sex, dir, reg, com, ciu, tel, cel;
         String rut1, dv1, nom, pat, mat, dir, tel, cel;
@@ -562,51 +562,46 @@ public class Mantenedor extends javax.swing.JFrame {
         //ciu = cmbCiudad.getSelectedItem().toString();
         tel = String.valueOf(txtTelefono.getText());
         cel = String.valueOf(txtCelular.getText());
-        
-        int RutP = Integer.parseInt(rut1);
-        
-         if (ExisteRut(RutP)) {
 
-            sSQL="UPDATE uhvida SET ";
-            sSQL=sSQL+"nombre='"+nom+"',";
-            sSQL=sSQL+"paterno='"+pat+"',";
-            sSQL=sSQL+"materno='"+mat+"',";
+        int RutP = Integer.parseInt(rut1);
+
+        if (ExisteRut(RutP)) {
+
+            sSQL = "UPDATE uhvida SET ";
+            sSQL = sSQL + "nombre='" + nom + "',";
+            sSQL = sSQL + "paterno='" + pat + "',";
+            sSQL = sSQL + "materno='" + mat + "',";
             //sSQL=sSQL+"sexo='"+sex+"',";
-            sSQL=sSQL+"direccion='"+dir+"',";
+            sSQL = sSQL + "direccion='" + dir + "',";
             //sSQL=sSQL+"id_region='"+reg+"',";
             //sSQL=sSQL+"id_comuna='"+com+"',";
             //sSQL=sSQL+"id_ciudad='"+ciu+"',";            
-            sSQL=sSQL+"telefono="+tel+",";
-            sSQL=sSQL+"celular="+cel+" ";
-            sSQL=sSQL+"where rut="+RutP;
+            sSQL = sSQL + "telefono=" + tel + ",";
+            sSQL = sSQL + "celular=" + cel + " ";
+            sSQL = sSQL + "where rut=" + RutP;
 
             mensaje = "Los datos se han Modificado de Manera Satisfactoria...";
 
-            try
-            {
+            try {
                 PreparedStatement pst = cn.prepareStatement(sSQL);
 
                 int n = pst.executeUpdate();
 
-                if(n > 0)
-                {
+                if (n > 0) {
                     JOptionPane.showMessageDialog(null, mensaje);
                     CargarTablaEmpleados("");
                 }
-            }
-            catch (SQLException ex)
-            {
+            } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
 
-        }else{
+        } else {
 
-            sSQL = "INSERT INTO uhvida (rut, dv, nombre, paterno, materno, id_sexo, direccion, id_region, id_comuna, id_ciudad, telefono, celular)" +
-            "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            sSQL = "INSERT INTO uhvida (rut, dv, nombre, paterno, materno, id_sexo, direccion, id_region, id_comuna, id_ciudad, telefono, celular)"
+                    + "VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             mensaje = "Datos insertados correctamente.";
 
-            try
-            {
+            try {
                 PreparedStatement pst = cn.prepareStatement(sSQL);
                 pst.setString(1, rut1);
                 pst.setString(2, dv1);
@@ -617,74 +612,67 @@ public class Mantenedor extends javax.swing.JFrame {
                 pst.setString(7, dir);
                 pst.setString(8, "1");
                 pst.setString(9, "1");
-                pst.setString(10,"1");                
+                pst.setString(10, "1");
                 pst.setString(11, tel);
                 pst.setString(12, cel);
 
                 int n = pst.executeUpdate();
 
-                if(n > 0)
-                {
+                if (n > 0) {
                     JOptionPane.showMessageDialog(null, mensaje);
                     CargarTablaEmpleados("");
                 }
-            }
-            catch (SQLException ex)
-            {
+            } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, ex);
             }
         }
-         
-        
+
+
     }//GEN-LAST:event_btnGrabarActionPerformed
 
     private void cmbSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbSexoActionPerformed
         // TODO add your handling code here:
-         
+
     }//GEN-LAST:event_cmbSexoActionPerformed
 
-    void region(){
-     String sSQL="select * from region";
-         ConexionMySQL mysql = new ConexionMySQL();
-           Connection cn = mysql.Conectar();
-           try{
-          Statement st = (Statement) cn.createStatement();
+    /**void region() {
+        String sSQL = "select * from region";
+        ConexionMySQL mysql = new ConexionMySQL();
+        Connection cn = mysql.Conectar();
+        try {
+            Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL);
-            
+
             cmbRegion.addItem("Seleciione Region");
-            while(rs.next()){
-            cmbRegion.addItem(rs.getNString("region"));
+            while (rs.next()) {
+                cmbRegion.addItem(rs.getNString("region"));
             }
             rs.close();
-           }  catch ( Exception ex ) {
+        } catch (Exception ex) {
 
-            }
-    
-    
-    
-    
+        }
+
     }
-    
-    
-    void Sexo(){
-    
-    String sSQL="select * from sexo";
-         ConexionMySQL mysql = new ConexionMySQL();
-           Connection cn = mysql.Conectar();
-           try{
-          Statement st = (Statement) cn.createStatement();
+
+    void Sexo() {
+
+        String sSQL = "select * from sexo";
+        ConexionMySQL mysql = new ConexionMySQL();
+        Connection cn = mysql.Conectar();
+        try {
+            Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL);
-            
+
             cmbSexo.addItem("Seleciione Sexo");
-            while(rs.next()){
-            cmbSexo.addItem(rs.getNString("sexo"));
+            while (rs.next()) {
+                cmbSexo.addItem(rs.getNString("sexo"));
             }
             rs.close();
-           }  catch ( Exception ex ) {
+        } catch (Exception ex) {
 
-            }
+        }
     }
-    
+**/
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
@@ -692,45 +680,45 @@ public class Mantenedor extends javax.swing.JFrame {
 
     private void GrillaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_GrillaMouseClicked
         // TODO add your handling code here:
-          fila = Grilla.rowAtPoint(evt.getPoint());                 
-         if (fila > -1){                          
-             txtRut.setText(String.valueOf(Grilla.getValueAt(fila, 0)));
-             txtDv.setText(String.valueOf(Grilla.getValueAt(fila, 1)));
-             txtNombre.setText(String.valueOf(Grilla.getValueAt(fila, 2)));
-             txtPaterno.setText(String.valueOf(Grilla.getValueAt(fila, 3)));
-             txtMaterno.setText(String.valueOf(Grilla.getValueAt(fila, 4)));
-             //cmbSexo.setText(String.valueOf(Grilla.getValueAt(fila, 5)));
-             txtDireccion.setText(String.valueOf(Grilla.getValueAt(fila, 6)));
-             //cmbComuna.setText(String.valueOf(Grilla1.getValueAt(fila, 7)));
-             //cmbCiudad.setText(String.valueOf(Grilla1.getValueAt(fila, 8)));             
-             //cmbRegion.setText(String.valueOf(Grilla1.getValueAt(fila, 9)));
-             txtTelefono.setText(String.valueOf(Grilla.getValueAt(fila, 10)));
-             txtCelular.setText(String.valueOf(Grilla.getValueAt(fila, 11)));
-         }
+        fila = Grilla.rowAtPoint(evt.getPoint());
+        if (fila > -1) {
+            txtRut.setText(String.valueOf(Grilla.getValueAt(fila, 0)));
+            txtDv.setText(String.valueOf(Grilla.getValueAt(fila, 1)));
+            txtNombre.setText(String.valueOf(Grilla.getValueAt(fila, 2)));
+            txtPaterno.setText(String.valueOf(Grilla.getValueAt(fila, 3)));
+            txtMaterno.setText(String.valueOf(Grilla.getValueAt(fila, 4)));
+            //cmbSexo.setText(String.valueOf(Grilla.getValueAt(fila, 5)));
+            txtDireccion.setText(String.valueOf(Grilla.getValueAt(fila, 6)));
+            //cmbComuna.setText(String.valueOf(Grilla1.getValueAt(fila, 7)));
+            //cmbCiudad.setText(String.valueOf(Grilla1.getValueAt(fila, 8)));             
+            //cmbRegion.setText(String.valueOf(Grilla1.getValueAt(fila, 9)));
+            txtTelefono.setText(String.valueOf(Grilla.getValueAt(fila, 10)));
+            txtCelular.setText(String.valueOf(Grilla.getValueAt(fila, 11)));
+        }
     }//GEN-LAST:event_GrillaMouseClicked
-   
-    public static Boolean ExisteRut(int Rut){
-            String sSQL="select * from uhvida where rut="+Rut;
-            try {
-                //clsConectarDB cnn = new clsConectarDB();
-                ConexionMySQL mysql = new ConexionMySQL();
-                Connection cn = mysql.Conectar();
-                //ResultSet rs = cn.EjecutaQuery(sql);
-                Statement st = (Statement) cn.createStatement();
-                ResultSet rs = (ResultSet) st.executeQuery(sSQL);
-                int ContReg=0;
-                while (rs.next()) {
-                    ContReg++;
-                }
-                if (ContReg>0) {
-                    return true;
-                } else {
-                    return false;
-                }
-            } catch ( Exception ex ) {
 
+    public static Boolean ExisteRut(int Rut) {
+        String sSQL = "select * from uhvida where rut=" + Rut;
+        try {
+            //clsConectarDB cnn = new clsConectarDB();
+            ConexionMySQL mysql = new ConexionMySQL();
+            Connection cn = mysql.Conectar();
+            //ResultSet rs = cn.EjecutaQuery(sql);
+            Statement st = (Statement) cn.createStatement();
+            ResultSet rs = (ResultSet) st.executeQuery(sSQL);
+            int ContReg = 0;
+            while (rs.next()) {
+                ContReg++;
             }
-            return false;
+            if (ContReg > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception ex) {
+
+        }
+        return false;
 
     }
 
@@ -768,9 +756,9 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
     }
-  void CargarTablaEmpleados(String valor)
-    {
-        String[] titulos = {"Rut", "Dv", "Nombre", "Paterno", "Materno","Sexo", "Direccion","Region", "Comuna","Ciudad", "Telefono","Celular"};
+
+    void CargarTablaEmpleados(String valor) {
+        String[] titulos = {"Rut", "Dv", "Nombre", "Paterno", "Materno", "Sexo", "Direccion", "Region", "Comuna", "Ciudad", "Telefono", "Celular"};
         String[] registro = new String[12];
         String sSQL = "";
         modelo = new DefaultTableModel(null, titulos);
@@ -780,19 +768,17 @@ public class Mantenedor extends javax.swing.JFrame {
 
         sSQL = "SELECT u.rut, u.dv, u.nombre, u.paterno, u.materno, s.sexo, u.direccion,  "
                 + "r.region,c.comuna, ci.ciudad, u.telefono, u.celular "
-                + "FROM uhvida u, comuna c, ciudad ci, region r, sexo s " +
-                "WHERE u.id_comuna = c.id_comuna "
+                + "FROM uhvida u, comuna c, ciudad ci, region r, sexo s "
+                + "WHERE u.id_comuna = c.id_comuna "
                 + "and u.id_region = r.id_region "
                 + "and u.id_ciudad = ci.id_ciudad "
                 + "and s.id_sexo = u.id_sexo "
-                + "and rut LIKE '%"+valor+"%'";
-        try
-        {
+                + "and rut LIKE '%" + valor + "%'";
+        try {
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL);
 
-            while(rs.next())
-            {
+            while (rs.next()) {
                 registro[0] = rs.getString("rut");
                 registro[1] = rs.getString("dv");
                 registro[2] = rs.getString("nombre");
@@ -808,16 +794,14 @@ public class Mantenedor extends javax.swing.JFrame {
                 modelo.addRow(registro);
             }
             Grilla.setModel(modelo);
-           
 
-        } 
-        catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
 
     }
-    void limpiar (){
+
+    void limpiar() {
         txtRut.setText("");
         txtDv.setText("");
         txtNombre.setText("");
@@ -828,14 +812,10 @@ public class Mantenedor extends javax.swing.JFrame {
         txtDireccion.setText("");
         txtTelefono.setText("");
         txtCelular.setText("");
-    
-    
+
     }
-  
-  
-    
-   void habilitar()
-    {
+
+    void habilitar() {
         txtRut.setEnabled(true);
         txtDv.setEnabled(true);
         cmbSexo.setEnabled(true);
@@ -847,7 +827,7 @@ public class Mantenedor extends javax.swing.JFrame {
         txtDireccion.setEnabled(true);
         cmbComuna.setEnabled(true);
         cmbCiudad.setEnabled(true);
-        cmbRegion.setEnabled(true); 
+        cmbRegion.setEnabled(true);
         txtTelefono.setEnabled(true);
         txtCelular.setEnabled(true);
         txtRut.setText("");
@@ -864,9 +844,8 @@ public class Mantenedor extends javax.swing.JFrame {
         btnBuscar.setEnabled(true);
         txtRut.requestFocus();
     }
-    
-   void inhabilitar()
-    {
+
+    void inhabilitar() {
         txtRut.setEnabled(false);
         txtDv.setEnabled(false);
         cmbSexo.setEnabled(false);
@@ -894,9 +873,8 @@ public class Mantenedor extends javax.swing.JFrame {
         btnLimpiar.setEnabled(false);
         btnBuscar.setEnabled(false);
     }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable Grilla;
     private javax.swing.JButton btnBuscar;
@@ -907,7 +885,7 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cmbCiudad;
     private javax.swing.JComboBox<String> cmbComuna;
-    private javax.swing.JComboBox<String> cmbRegion;
+    private javax.swing.JComboBox<Regiones> cmbRegion;
     private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
