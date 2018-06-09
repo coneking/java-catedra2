@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author azapata
+ * 
  */
 public class Mantenedor extends javax.swing.JFrame {
 
