@@ -6,11 +6,15 @@
 package catedra2;
 
 import Base_Datos.ConexionMySQL;
+import Datos.Ciudad_combo;
+import Datos.Comuna_combo;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import Datos.Region_combo;
+
 
 /**
  *
@@ -18,6 +22,10 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Mantenedor extends javax.swing.JFrame {
 
+        Region_combo rg = new Region_combo();
+        Ciudad_combo ci = new Ciudad_combo();
+        Comuna_combo cm = new Comuna_combo();
+    
     /**
      * Creates new form Mantenedor
      */
@@ -28,14 +36,16 @@ public class Mantenedor extends javax.swing.JFrame {
         initComponents();
         inhabilitar();
         
-        Regiones rg = new Regiones();
-        rg.cargarR(cmbRegion);
+        rg.listar_region(cmbRegion);
         
-        Ciudades ci = new Ciudades();
-        ci.cargarCi(cmbCiudad);
+        //Regiones rg = new Regiones();
+        //rg.cargarR(cmbRegion);
         
-        Comunas cm = new Comunas();
-        cm.cargarCm(cmbComuna);
+        //Ciudades ci = new Ciudades();
+        //ci.cargarCi(cmbCiudad);
+        
+        //Comunas cm = new Comunas();
+        //cm.cargarCm(cmbComuna);     
         
         Sexo se = new Sexo();
         se.cargarS(cmbSexo);
@@ -235,7 +245,19 @@ public class Mantenedor extends javax.swing.JFrame {
 
         jLabel6.setText("Ciudad");
 
+        cmbCiudad.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbCiudadItemStateChanged(evt);
+            }
+        });
+
         jLabel7.setText("Region");
+
+        cmbRegion.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cmbRegionItemStateChanged(evt);
+            }
+        });
 
         jLabel8.setText("Direccion");
 
@@ -711,6 +733,21 @@ public class Mantenedor extends javax.swing.JFrame {
     private void cmbComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbComunaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbComunaActionPerformed
+
+    private void cmbRegionItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbRegionItemStateChanged
+        Region reg = (Region)this.cmbRegion.getSelectedItem();
+        int id = reg.getId_region();
+        ci.listar_ciudad(cmbCiudad, id);
+        
+    }//GEN-LAST:event_cmbRegionItemStateChanged
+
+    private void cmbCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCiudadItemStateChanged
+        Ciudad ciu = (Ciudad)this.cmbCiudad.getSelectedItem();
+        int id = ciu.getId_ciudad();
+        cm.listar_comuna(cmbComuna, id);
+        //ci.listar_ciudad(cmbComuna, id);
+        
+    }//GEN-LAST:event_cmbCiudadItemStateChanged
 
     public static Boolean ExisteRut(int Rut) {
         String sSQL = "select * from uhvida where rut=" + Rut;
