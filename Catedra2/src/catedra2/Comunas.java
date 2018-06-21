@@ -19,16 +19,16 @@ import javax.swing.JOptionPane;
  *
  * @author Coneking
  */
-public class Ciudades {
+public class Comunas {
 
     //public int id;
     public String nombre;
 
-    public Ciudades(String nombre) {
+    public Comunas(String nombre) {
         this.nombre = nombre;
     }
 
-    public Ciudades() {
+    public Comunas() {
     }
 
     public String getNombre() {
@@ -39,31 +39,29 @@ public class Ciudades {
         this.nombre = nombre;
     }
 
-    public void cargarCi(JComboBox<Ciudades> cbx_ciudad) {
+    public void cargarCm(JComboBox<Comunas> cbx_comuna) {
 
         ConexionMySQL mysql = new ConexionMySQL();
         Connection cn = mysql.Conectar();
         
 
         try {
-            String sSQL = "SELECT * FROM ciudad ;";
+            String sSQL = "SELECT * FROM comuna ;";
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL);
 
             for (int i = 0; i <= 1; i++) {
                 if (i == 0) {
                     int a = 0;
-                    String b = "", c = "Seleccionar Ciudad";
-                    cbx_ciudad.addItem(
-                            new Ciudades(
+                    String b = "", c = "Seleccionar Comuna";
+                    cbx_comuna.addItem(new Comunas(
                                  c
                             )
                     );
                 } else {
                     while (rs.next()) {
-                        cbx_ciudad.addItem(
-                                new Ciudades(
-                                        rs.getString("ciudad")
+                        cbx_comuna.addItem(new Comunas(
+                                        rs.getString("comuna")
                                 )
                         );
                     }
@@ -71,7 +69,7 @@ public class Ciudades {
             }
 
         } catch (Exception ex) {
-            Logger.getLogger(Ciudades.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Comunas.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

@@ -32,7 +32,10 @@ public class Mantenedor extends javax.swing.JFrame {
         rg.cargarR(cmbRegion);
         
         Ciudades ci = new Ciudades();
-        ci.cargarC(cmbCiudad);
+        ci.cargarCi(cmbCiudad);
+        
+        Comunas cm = new Comunas();
+        cm.cargarCm(cmbComuna);
         
         Sexo se = new Sexo();
         se.cargarS(cmbSexo);
@@ -224,7 +227,11 @@ public class Mantenedor extends javax.swing.JFrame {
 
         jLabel5.setText("Comuna");
 
-        cmbComuna.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbComuna.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbComunaActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Ciudad");
 
@@ -701,6 +708,10 @@ public class Mantenedor extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_GrillaMouseClicked
 
+    private void cmbComunaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbComunaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbComunaActionPerformed
+
     public static Boolean ExisteRut(int Rut) {
         String sSQL = "select * from uhvida where rut=" + Rut;
         try {
@@ -888,7 +899,7 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<Ciudades> cmbCiudad;
-    private javax.swing.JComboBox<String> cmbComuna;
+    private javax.swing.JComboBox<Comunas> cmbComuna;
     private javax.swing.JComboBox<Regiones> cmbRegion;
     private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JLabel jLabel1;

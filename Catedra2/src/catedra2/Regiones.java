@@ -7,6 +7,7 @@ package catedra2;
 
 import Base_Datos.ConexionMySQL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,11 +23,6 @@ import javax.swing.JOptionPane;
 public class Regiones {
      public int id;
     public String nombre, num_r;
-
-    //Connection connect;
-     ConexionMySQL mysql = new ConexionMySQL();
-     Connection cn = mysql.Conectar();
-
 
     public Regiones(int id, String nombre) {
         this.id = id;
@@ -65,10 +61,9 @@ public class Regiones {
         
         ConexionMySQL mysql = new ConexionMySQL();
         Connection cn = mysql.Conectar();
-        String sSQL = "SELECT * FROM region ;";
         
-        try
-        {
+        try{
+            String sSQL = "SELECT * FROM region ;";
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL); 
 
@@ -94,6 +89,7 @@ public class Regiones {
                 }
             }
         }
+
 
     } catch (Exception ex) {
         Logger.getLogger(Regiones.class.getName()).log(Level.SEVERE, null, ex);
