@@ -517,6 +517,12 @@ public class Mantenedor extends javax.swing.JFrame {
             cmbComuna.requestFocus(true);
             return;
         }
+        int IndSex = cmbSexo.getSelectedIndex();
+        if (IndSex<=0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar seleccionar sexo antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            cmbSexo.requestFocus(true);
+            return;
+        }
         if (txtTelefono.getText().length() > 0) {
             try {
                 int Valor2 = Integer.parseInt(txtTelefono.getText());
@@ -685,7 +691,7 @@ public class Mantenedor extends javax.swing.JFrame {
             cmbComuna.setToolTipText(String.valueOf(Grilla.getValueAt(fila, 8)));
             txtDireccion.setText(String.valueOf(Grilla.getValueAt(fila, 9)));
             txtTelefono.setText(String.valueOf(Grilla.getValueAt(fila, 10)));
-            txtCelular.setText(String.valueOf(Grilla.getValueAt(fila, 11)));
+            txtCelular.setText(String.valueOf(Grilla.getValueAt(fila,11)));
         }
     }//GEN-LAST:event_GrillaMouseClicked
 
@@ -704,7 +710,6 @@ public class Mantenedor extends javax.swing.JFrame {
         Ciudad ciu = (Ciudad)this.cmbCiudad.getSelectedItem();
         int id = ciu.getId_ciudad();
         cm.listar_comuna(cmbComuna, id);
-        //ci.listar_ciudad(cmbComuna, id);
     }//GEN-LAST:event_cmbCiudadItemStateChanged
 
     private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
