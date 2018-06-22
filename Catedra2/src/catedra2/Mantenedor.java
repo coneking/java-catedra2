@@ -14,6 +14,7 @@ import java.sql.*;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import Datos.Region_combo;
+import java.awt.event.ItemEvent;
 
 
 /**
@@ -37,6 +38,8 @@ public class Mantenedor extends javax.swing.JFrame {
         inhabilitar();
         
         rg.listar_region(cmbRegion);
+        ci.listar_ciudad(cmbCiudad, WIDTH);
+        cm.listar_comuna(cmbComuna, WIDTH);
         
         //Regiones rg = new Regiones();
         //rg.cargarR(cmbRegion);
@@ -248,6 +251,11 @@ public class Mantenedor extends javax.swing.JFrame {
         cmbCiudad.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cmbCiudadItemStateChanged(evt);
+            }
+        });
+        cmbCiudad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbCiudadActionPerformed(evt);
             }
         });
 
@@ -579,8 +587,7 @@ public class Mantenedor extends javax.swing.JFrame {
         }
         ConexionMySQL mysql = new ConexionMySQL();
         Connection cn = mysql.Conectar();
-        //String rut1, dv1, nom, pat, mat, sex, dir, reg, com, ciu, tel, cel;
-        String rut1, dv1, nom, pat, mat, dir, tel, cel;
+        String rut1, dv1, nom, pat, mat, sex, dir="0", reg="0", com="0", ciu="0", tel, cel;
         String sSQL = "";
         String mensaje = "";
         rut1 = txtRut.getText();
@@ -589,14 +596,21 @@ public class Mantenedor extends javax.swing.JFrame {
         pat = txtPaterno.getText();
         mat = txtMaterno.getText();
         dir = txtDireccion.getText();
-        //sex = cmbSexo.getSelectedItem().toString();
-        //reg = cmbRegion.getSelectedItem().toString();
-        //com = cmbComuna.getSelectedItem().toString();
-        //ciu = cmbCiudad.getSelectedItem().toString();
         tel = String.valueOf(txtTelefono.getText());
         cel = String.valueOf(txtCelular.getText());
 
         int RutP = Integer.parseInt(rut1);
+        int idsex = cmbSexo.getSelectedIndex();
+        sex = String.valueOf(idsex);
+        
+        int idreg = cmbRegion.getItemAt(cmbRegion.getSelectedIndex()).getId_region();
+        reg = String.valueOf(idreg);
+        
+        int idcom = cmbComuna.getItemAt(cmbComuna.getSelectedIndex()).getId_comuna();
+        com = String.valueOf(idcom);
+        
+        int idciu = cmbCiudad.getItemAt(cmbCiudad.getSelectedIndex()).getId_ciudad();
+        ciu = String.valueOf(idciu);
 
         if (ExisteRut(RutP)) {
 
@@ -604,11 +618,11 @@ public class Mantenedor extends javax.swing.JFrame {
             sSQL = sSQL + "nombre='" + nom + "',";
             sSQL = sSQL + "paterno='" + pat + "',";
             sSQL = sSQL + "materno='" + mat + "',";
-            //sSQL=sSQL+"sexo='"+sex+"',";
+            sSQL = sSQL + "id_sexo='" + sex + "',";
             sSQL = sSQL + "direccion='" + dir + "',";
-            //sSQL=sSQL+"id_region='"+reg+"',";
-            //sSQL=sSQL+"id_comuna='"+com+"',";
-            //sSQL=sSQL+"id_ciudad='"+ciu+"',";            
+            sSQL = sSQL + "id_region='" + reg + "',";
+            sSQL = sSQL + "id_comuna='" + com + "',";
+            sSQL = sSQL + "id_ciudad='" + ciu + "',";            
             sSQL = sSQL + "telefono=" + tel + ",";
             sSQL = sSQL + "celular=" + cel + " ";
             sSQL = sSQL + "where rut=" + RutP;
@@ -641,11 +655,11 @@ public class Mantenedor extends javax.swing.JFrame {
                 pst.setString(3, nom);
                 pst.setString(4, pat);
                 pst.setString(5, mat);
-                pst.setString(6, "1");
+                pst.setString(6, sex);
                 pst.setString(7, dir);
-                pst.setString(8, "1");
-                pst.setString(9, "1");
-                pst.setString(10, "1");
+                pst.setString(8, reg);
+                pst.setString(9, com);
+                pst.setString(10, ciu);
                 pst.setString(11, tel);
                 pst.setString(12, cel);
 
@@ -742,12 +756,18 @@ public class Mantenedor extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRegionItemStateChanged
 
     private void cmbCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCiudadItemStateChanged
+      if (evt.getStateChange() == ItemEvent.SELECTED) {
+        cmbComuna.removeAllItems();
         Ciudad ciu = (Ciudad)this.cmbCiudad.getSelectedItem();
         int id = ciu.getId_ciudad();
         cm.listar_comuna(cmbComuna, id);
         //ci.listar_ciudad(cmbComuna, id);
-        
+      }
     }//GEN-LAST:event_cmbCiudadItemStateChanged
+
+    private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbCiudadActionPerformed
 
     public static Boolean ExisteRut(int Rut) {
         String sSQL = "select * from uhvida where rut=" + Rut;
@@ -864,6 +884,7 @@ public class Mantenedor extends javax.swing.JFrame {
         txtDireccion.setText("");
         txtTelefono.setText("");
         txtCelular.setText("");
+        cmbSexo.setActionCommand("");
 
     }
 
@@ -935,9 +956,9 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JButton btnLimpiar;
     private javax.swing.JButton btnNuevo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JComboBox<Ciudades> cmbCiudad;
-    private javax.swing.JComboBox<Comunas> cmbComuna;
-    private javax.swing.JComboBox<Regiones> cmbRegion;
+    private javax.swing.JComboBox<Ciudad> cmbCiudad;
+    private javax.swing.JComboBox<Comuna> cmbComuna;
+    private javax.swing.JComboBox<Region> cmbRegion;
     private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
