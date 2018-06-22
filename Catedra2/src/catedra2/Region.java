@@ -12,12 +12,14 @@ package catedra2;
 public class Region {
     private int id_region;
     private String nombre;
+    private String mensaje;
     
     public Region(){}
     
     public Region(int id, String nombre){
         this.id_region = id;
         this.nombre = nombre;
+        //this.mensaje = mensaje;
         
     }
 
@@ -51,6 +53,13 @@ public class Region {
     
     public String toString(){
         return this.nombre;
+    }
+
+    /**
+     * @return the mensaje
+     */
+    public String getMensaje() {
+        return mensaje;
     }
 
     

@@ -50,10 +50,10 @@ public class Mantenedor extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         txtRut = new javax.swing.JTextField();
-        label1 = new java.awt.Label();
         txtDv = new javax.swing.JTextField();
-        label2 = new java.awt.Label();
         btnBuscar = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JButton();
         btnNuevo = new javax.swing.JButton();
@@ -90,10 +90,6 @@ public class Mantenedor extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(204, 255, 204));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
 
-        label1.setText("Rut");
-
-        label2.setText("Dv");
-
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,29 +97,38 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
+        jLabel11.setText("RUT");
+
+        jLabel12.setText("DV");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(58, 58, 58)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtDv)
-                    .addComponent(label2, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(38, 38, 38)))
                 .addGap(44, 44, 44)
                 .addComponent(btnBuscar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(408, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRut, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -209,9 +214,9 @@ public class Mantenedor extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        jLabel2.setText("Paterno");
+        jLabel2.setText("Apellido Paterno");
 
-        jLabel3.setText("Materno");
+        jLabel3.setText("Apellido Materno");
 
         jLabel4.setText("Sexo");
 
@@ -242,7 +247,7 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setText("Region");
+        jLabel7.setText("Región");
 
         cmbRegion.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -250,9 +255,9 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setText("Direccion");
+        jLabel8.setText("Dirección");
 
-        jLabel9.setText("Telefono");
+        jLabel9.setText("Teléfono");
 
         jLabel10.setText("Celular");
 
@@ -281,14 +286,14 @@ public class Mantenedor extends javax.swing.JFrame {
                                     .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txtPaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2))))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtMaterno, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,46 +486,52 @@ public class Mantenedor extends javax.swing.JFrame {
     private void btnGrabarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGrabarActionPerformed
         // TODO add your handling code here:
         if (!ValidaRut.isValidRut(txtRut.getText(), txtDv.getText())) {
-            JOptionPane.showMessageDialog(null, "Rut indicado no es valido: " + txtRut.getText() + "-" + txtDv.getText() + ".", "Buscar Rut", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Rut indicado no es válido: " + txtRut.getText() + "-" + txtDv.getText() + ".", "Buscar Rut", JOptionPane.ERROR_MESSAGE);
             habilitar();
             return;
         }
         if (txtNombre.getText().length() <= 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el nombre antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Nombre' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtNombre.requestFocus(true);
             return;
         }
         if (txtPaterno.getText().length() <= 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el apellido paterno antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Apellido Paterno' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtPaterno.requestFocus(true);
             return;
         }
         if (txtMaterno.getText().length() <= 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar el apellido materno antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Apellido Materno' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             txtMaterno.requestFocus(true);
             return;
         }
-        if (txtDireccion.getText().length() <= 0) {
-            JOptionPane.showMessageDialog(null, "Debe ingresar la direccion antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            txtDireccion.requestFocus(true);
+        int IndSex = cmbSexo.getSelectedIndex();
+        if (IndSex<=0){
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Sexo' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            cmbSexo.requestFocus(true);
             return;
         }
-        int IndReg= cmbCiudad.getSelectedIndex();
+        int IndReg= cmbRegion.getSelectedIndex();
         if (IndReg<=0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar la ciudad antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Región' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            cmbRegion.requestFocus(true);
+            return;
+        }
+        int IndCiu= cmbCiudad.getSelectedIndex();
+        if (IndCiu<=0){
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Ciudad' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             cmbCiudad.requestFocus(true);
             return;
         }
         int IndCom = cmbComuna.getSelectedIndex();
         if (IndCom<=0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar la comuna antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Comuna' antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
             cmbComuna.requestFocus(true);
             return;
         }
-        int IndSex = cmbSexo.getSelectedIndex();
-        if (IndSex<=0){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar seleccionar sexo antes de continuar.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-            cmbSexo.requestFocus(true);
+        if (txtDireccion.getText().length() <= 0) {
+            JOptionPane.showMessageDialog(null, "Debe ingresar campo 'Dirección' antes de continuar..", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            txtDireccion.requestFocus(true);
             return;
         }
         if (txtTelefono.getText().length() > 0) {
@@ -909,6 +920,8 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JComboBox<Sexo> cmbSexo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -922,8 +935,6 @@ public class Mantenedor extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private java.awt.Label label1;
-    private java.awt.Label label2;
     private javax.swing.JTextField txtCelular;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtDv;

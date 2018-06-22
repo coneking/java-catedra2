@@ -7,7 +7,6 @@ package Datos;
 
 import Base_Datos.ConexionMySQL;
 import catedra2.Ciudad;
-import catedra2.Region;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -35,6 +34,7 @@ public class Ciudad_combo {
             value = new DefaultComboBoxModel();
             box.setModel(value);
             
+            value.addElement(new Ciudad(0, "Ingrese Ciudad"));
             while(rs.next()){
                 value.addElement(new Ciudad(rs.getInt(1),rs.getString(2)));
                 

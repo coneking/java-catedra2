@@ -18,30 +18,34 @@ import javax.swing.JComboBox;
  * @author sconejer
  */
 public class Region_combo {
-    public void listar_region(JComboBox box){
+
+    public void listar_region(JComboBox box) {
         DefaultComboBoxModel value;
         ConexionMySQL conec = new ConexionMySQL();
         Statement st = null;
         Connection con = null;
         ResultSet rs = null;
-        
-        try{
+
+        try {
             con = conec.Conectar();
             st = con.createStatement();
             rs = st.executeQuery("Select * from region");
             value = new DefaultComboBoxModel();
             box.setModel(value);
-            
-            while(rs.next()){
-                value.addElement(new Region(rs.getInt(1),rs.getString(2)));
-                
+
+            value.addElement(new Region(0, "Ingrese Región"));
+
+            while (rs.next()) {
+                value.addElement(new Region(rs.getInt(1), rs.getString(2)));
+
             }
-        }catch(Exception ex){
-        }finally{
-            try{
+
+        } catch (Exception ex) {
+        } finally {
+            try {
                 st.close();
                 rs.close();
-            }catch(Exception ex){
+            } catch (Exception ex) {
             }
         }
     }
