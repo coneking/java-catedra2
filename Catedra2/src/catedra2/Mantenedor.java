@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package catedra2;
 
 import Base_Datos.ConexionMySQL;
@@ -19,13 +14,14 @@ import java.awt.event.ItemEvent;
 
 /**
  *
- * @author azapata
+ * @author sconejer
  */
 public class Mantenedor extends javax.swing.JFrame {
 
         Region_combo rg = new Region_combo();
         Ciudad_combo ci = new Ciudad_combo();
         Comuna_combo cm = new Comuna_combo();
+        Sexo se = new Sexo();
     
     /**
      * Creates new form Mantenedor
@@ -39,21 +35,8 @@ public class Mantenedor extends javax.swing.JFrame {
         
         rg.listar_region(cmbRegion);
         ci.listar_ciudad(cmbCiudad, WIDTH);
-        cm.listar_comuna(cmbComuna, WIDTH);
-        
-        //Regiones rg = new Regiones();
-        //rg.cargarR(cmbRegion);
-        
-        //Ciudades ci = new Ciudades();
-        //ci.cargarCi(cmbCiudad);
-        
-        //Comunas cm = new Comunas();
-        //cm.cargarCm(cmbComuna);     
-        
-        Sexo se = new Sexo();
         se.cargarS(cmbSexo);
-//        Sexo();
-  //      region();
+
     }
 
     /**
@@ -522,18 +505,18 @@ public class Mantenedor extends javax.swing.JFrame {
             txtDireccion.requestFocus(true);
             return;
         }
-        //int IndReg= cmbCiudad.getSelectedIndex();
-        //if (IndReg<=0){
-        //    JOptionPane.showMessageDialog(null, "Debe seleccionar la ciudad antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        //    cmbCiudad.requestFocus(true);
-        //    return;
-        //}
-        //int IndCom = cmbComuna.getSelectedIndex();
-        //if (IndCom<=0){
-        //    JOptionPane.showMessageDialog(null, "Debe seleccionar la comuna antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
-        //    cmbComuna.requestFocus(true);
-        //    return;
-        //}
+        int IndReg= cmbCiudad.getSelectedIndex();
+        if (IndReg<=0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la ciudad antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            cmbCiudad.requestFocus(true);
+            return;
+        }
+        int IndCom = cmbComuna.getSelectedIndex();
+        if (IndCom<=0){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar la comuna antes de guardar... intentelo nuevamente.", "ERROR", JOptionPane.INFORMATION_MESSAGE);
+            cmbComuna.requestFocus(true);
+            return;
+        }
         if (txtTelefono.getText().length() > 0) {
             try {
                 int Valor2 = Integer.parseInt(txtTelefono.getText());
@@ -682,44 +665,6 @@ public class Mantenedor extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cmbSexoActionPerformed
 
-    /**void region() {
-        String sSQL = "select * from region";
-        ConexionMySQL mysql = new ConexionMySQL();
-        Connection cn = mysql.Conectar();
-        try {
-            Statement st = (Statement) cn.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(sSQL);
-
-            cmbRegion.addItem("Seleciione Region");
-            while (rs.next()) {
-                cmbRegion.addItem(rs.getNString("region"));
-            }
-            rs.close();
-        } catch (Exception ex) {
-
-        }
-
-    }
-
-    void Sexo() {
-
-        String sSQL = "select * from sexo";
-        ConexionMySQL mysql = new ConexionMySQL();
-        Connection cn = mysql.Conectar();
-        try {
-            Statement st = (Statement) cn.createStatement();
-            ResultSet rs = (ResultSet) st.executeQuery(sSQL);
-
-            cmbSexo.addItem("Seleciione Sexo");
-            while (rs.next()) {
-                cmbSexo.addItem(rs.getNString("sexo"));
-            }
-            rs.close();
-        } catch (Exception ex) {
-
-        }
-    }
-**/
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
@@ -734,11 +679,11 @@ public class Mantenedor extends javax.swing.JFrame {
             txtNombre.setText(String.valueOf(Grilla.getValueAt(fila, 2)));
             txtPaterno.setText(String.valueOf(Grilla.getValueAt(fila, 3)));
             txtMaterno.setText(String.valueOf(Grilla.getValueAt(fila, 4)));
-            //cmbSexo.setText(String.valueOf(Grilla.getValueAt(fila, 5)));
-            txtDireccion.setText(String.valueOf(Grilla.getValueAt(fila, 6)));
-            //cmbComuna.setText(String.valueOf(Grilla1.getValueAt(fila, 7)));
-            //cmbCiudad.setText(String.valueOf(Grilla1.getValueAt(fila, 8)));             
-            //cmbRegion.setText(String.valueOf(Grilla1.getValueAt(fila, 9)));
+            cmbSexo.setToolTipText(String.valueOf(Grilla.getValueAt(fila, 5)));
+            cmbRegion.setToolTipText(String.valueOf(Grilla.getValueAt(fila, 6)));
+            cmbCiudad.setToolTipText(String.valueOf(Grilla.getValueAt(fila, 7)));
+            cmbComuna.setToolTipText(String.valueOf(Grilla.getValueAt(fila, 8)));
+            txtDireccion.setText(String.valueOf(Grilla.getValueAt(fila, 9)));
             txtTelefono.setText(String.valueOf(Grilla.getValueAt(fila, 10)));
             txtCelular.setText(String.valueOf(Grilla.getValueAt(fila, 11)));
         }
@@ -756,13 +701,10 @@ public class Mantenedor extends javax.swing.JFrame {
     }//GEN-LAST:event_cmbRegionItemStateChanged
 
     private void cmbCiudadItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCiudadItemStateChanged
-      if (evt.getStateChange() == ItemEvent.SELECTED) {
-        cmbComuna.removeAllItems();
         Ciudad ciu = (Ciudad)this.cmbCiudad.getSelectedItem();
         int id = ciu.getId_ciudad();
         cm.listar_comuna(cmbComuna, id);
         //ci.listar_ciudad(cmbComuna, id);
-      }
     }//GEN-LAST:event_cmbCiudadItemStateChanged
 
     private void cmbCiudadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbCiudadActionPerformed
@@ -772,10 +714,8 @@ public class Mantenedor extends javax.swing.JFrame {
     public static Boolean ExisteRut(int Rut) {
         String sSQL = "select * from uhvida where rut=" + Rut;
         try {
-            //clsConectarDB cnn = new clsConectarDB();
             ConexionMySQL mysql = new ConexionMySQL();
             Connection cn = mysql.Conectar();
-            //ResultSet rs = cn.EjecutaQuery(sql);
             Statement st = (Statement) cn.createStatement();
             ResultSet rs = (ResultSet) st.executeQuery(sSQL);
             int ContReg = 0;
@@ -884,8 +824,10 @@ public class Mantenedor extends javax.swing.JFrame {
         txtDireccion.setText("");
         txtTelefono.setText("");
         txtCelular.setText("");
-        cmbSexo.setActionCommand("");
-
+        cmbSexo.setSelectedIndex(0);
+        cmbCiudad.setSelectedIndex(0);
+        cmbRegion.setSelectedIndex(0);
+        cmbComuna.setSelectedIndex(0);
     }
 
     void habilitar() {
