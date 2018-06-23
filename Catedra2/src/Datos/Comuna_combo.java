@@ -34,7 +34,7 @@ public class Comuna_combo {
             value = new DefaultComboBoxModel();
             box.setModel(value);
             
-            value.addElement(new Comuna(0, "Ingrese Comuna"));
+            value.addElement(new Comuna(0, "Seleccione Comuna"));
             while(rs.next()){
                 value.addElement(new Comuna(rs.getInt(1),rs.getString(2)));
                 

@@ -34,7 +34,7 @@ public class Ciudad_combo {
             value = new DefaultComboBoxModel();
             box.setModel(value);
             
-            value.addElement(new Ciudad(0, "Ingrese Ciudad"));
+            value.addElement(new Ciudad(0, "Seleccione Ciudad"));
             while(rs.next()){
                 value.addElement(new Ciudad(rs.getInt(1),rs.getString(2)));
                 

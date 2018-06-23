@@ -33,7 +33,7 @@ public class Region_combo {
             value = new DefaultComboBoxModel();
             box.setModel(value);
 
-            value.addElement(new Region(0, "Ingrese Región"));
+            value.addElement(new Region(0, "Seleccione Región"));
 
             while (rs.next()) {
                 value.addElement(new Region(rs.getInt(1), rs.getString(2)));
