@@ -87,7 +87,7 @@ public class Mantenedor extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel1.setBackground(new java.awt.Color(153, 204, 255));
         jPanel1.setForeground(new java.awt.Color(204, 255, 204));
 
         btnBuscar.setText("Buscar");
@@ -97,10 +97,9 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel11.setText("RUT");
 
-        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
         jLabel12.setText("DV");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -140,7 +139,7 @@ public class Mantenedor extends javax.swing.JFrame {
 
         txtRut.getAccessibleContext().setAccessibleName("");
 
-        jPanel2.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -207,18 +206,14 @@ public class Mantenedor extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel3.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel3.setBackground(new java.awt.Color(153, 204, 255));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Nombre");
 
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Apellido Paterno");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Apellido Materno");
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Sexo");
 
         cmbSexo.addActionListener(new java.awt.event.ActionListener() {
@@ -227,7 +222,6 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Comuna");
 
         cmbComuna.addActionListener(new java.awt.event.ActionListener() {
@@ -236,7 +230,6 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Ciudad");
 
         cmbCiudad.addItemListener(new java.awt.event.ItemListener() {
@@ -250,7 +243,6 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Región");
 
         cmbRegion.addItemListener(new java.awt.event.ItemListener() {
@@ -259,13 +251,10 @@ public class Mantenedor extends javax.swing.JFrame {
             }
         });
 
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Dirección");
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Teléfono");
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Celular");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -352,7 +341,7 @@ public class Mantenedor extends javax.swing.JFrame {
 
         cmbSexo.getAccessibleContext().setAccessibleName("");
 
-        jPanel4.setBackground(new java.awt.Color(102, 153, 255));
+        jPanel4.setBackground(new java.awt.Color(153, 204, 255));
 
         Grilla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
